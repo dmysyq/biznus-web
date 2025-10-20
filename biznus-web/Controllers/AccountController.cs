@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using biznus_web.Models;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
 using System.Text;
 
 namespace biznus_web.Controllers
@@ -13,9 +15,11 @@ namespace biznus_web.Controllers
         private readonly ILogger<AccountController> _logger;
         private static readonly Dictionary<string, AppUser> _users = new Dictionary<string, AppUser>();
 
+
         public AccountController(ILogger<AccountController> logger)
         {
             _logger = logger;
+
             SeedTestUsers();
         }
 
@@ -33,7 +37,8 @@ namespace biznus_web.Controllers
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             _logger.LogInformation("Login attempt for email: {Email}", model.Email);
-            
+
+
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Login failed - invalid model state for email: {Email}", model.Email);
@@ -257,6 +262,17 @@ namespace biznus_web.Controllers
         private bool VerifyPassword(string password, string hash)
         {
             return HashPassword(password) == hash;
+        }
+        public JsonResult Cookie(string culture)
+        {
+            Response.Cookies
+                .Append(
+
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.Now.AddHours(1) }
+                );
+            return Json(culture);
         }
     }
 }

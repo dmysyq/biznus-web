@@ -1,6 +1,4 @@
 @model ContactViewModel
-@using Microsoft.AspNetCore.Mvc.Localization;
-@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Contact";
 }
@@ -36,7 +34,7 @@
             <div class="contact-left">
                 <h2>Contact Us</h2>
                 <div class="w-richtext">
-                    <p>Acme Outdoors<br/>123 Rainy Street<br/>Oklahoma City, OK 73129</p>
+                    <p>Acme Outdoors<br/>123 Rainy Street<br/>@Localizer["CityName"]</p>
                     <p>‍<br/><strong>General Inquiries:</strong> (405) 555-5555<br/><strong>Customer Support:</strong> (405) 555-5556</p>
                 </div>
             </div>

@@ -7,6 +7,7 @@ namespace biznus_web.Controllers
     {
         private readonly ILogger<ContactController> _logger;
 
+
         public ContactController(ILogger<ContactController> logger)
         {
             _logger = logger;

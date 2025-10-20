@@ -1,8 +1,8 @@
 using biznus_web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -14,8 +14,7 @@ namespace biznus_web.Controllers
         private readonly IStringLocalizer<HomeController> _stringLocalizer;
 
 
-        public HomeController(ILogger<HomeController> logger,
-                                                            IStringLocalizer<HomeController> stringLocalizer)
+        public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> stringLocalizer)
         {
             _logger = logger;
             _stringLocalizer = stringLocalizer;
@@ -23,8 +22,6 @@ namespace biznus_web.Controllers
 
         public IActionResult Index()
         {
-            var test = _stringLocalizer["Home"];
-
             _logger.LogInformation("User accessed home page");
             var viewModel = new HomeViewModel
             {
