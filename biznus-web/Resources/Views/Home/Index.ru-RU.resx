@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ServingSince" xml:space="preserve">
+    <value>Обслуживаем вас с 1989 года.</value>
+  </data>
+  <data name="HeroDescription" xml:space="preserve">
+    <value>Acme Outdoors - это магазин для активного отдыха и приключений, расположенный в районе Boathouse District в Оклахома-Сити.</value>
+  </data>
+  <data name="ShopMerch" xml:space="preserve">
+    <value>Магазин товаров</value>
+  </data>
+  <data name="WaysToSupport" xml:space="preserve">
+    <value>Способы поддержки</value>
+  </data>
+  <data name="SupportAcmeOutdoors" xml:space="preserve">
+    <value>Поддержите Acme Outdoors.</value>
+  </data>
+  <data name="CovidDescription" xml:space="preserve">
+    <value>COVID-19 заставил нас закрыть наше торговое пространство, но нам нужна поддержка от таких покровителей, как вы, сейчас больше, чем когда-либо. Ниже мы перечислили лучшие способы помочь нам в этот сезон.</value>
+  </data>
+  <data name="ShopProducts" xml:space="preserve">
+    <value>ПОКУПАЙТЕ<br/>ТОВАРЫ</value>
+  </data>
+  <data name="ShopProductsDescription" xml:space="preserve">
+    <value>Наша полная линейка продуктов по-прежнему доступна онлайн здесь, на нашем сайте! Выход на улицу и походы - это то, что вы все еще можете делать. Получите свое снаряжение сейчас!</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Пожертвовать</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Поскольку мы изменили способ работы только на онлайн, и чтобы обеспечить вашу безопасность, не весь наш персонал работает. Пожертвуйте, чтобы поддержать их на плаву.</value>
+  </data>
+  <data name="BuyGiftCards" xml:space="preserve">
+    <value>ПОКУПАЙТЕ<br/>ПОДАРОЧНЫЕ КАРТЫ</value>
+  </data>
+  <data name="BuyGiftCardsDescription" xml:space="preserve">
+    <value>У вас есть все необходимое снаряжение для активного отдыха? Купите подарочную карту и используйте ее позже или поделитесь с друзьями и семьей.</value>
+  </data>
+  <data name="CovidSafety" xml:space="preserve">
+    <value>Как мы обеспечиваем вашу безопасность во время COVID-19</value>
+  </data>
+  <data name="CovidSafetyDescription" xml:space="preserve">
+    <value>Как магазин для активного отдыха, мы приняли профилактические меры для обеспечения безопасности всех наших клиентов и членов команды.</value>
+  </data>
+  <data name="ReadStatement" xml:space="preserve">
+    <value>Прочитайте наше заявление</value>
+  </data>
+  <data name="ShopProductsTitle" xml:space="preserve">
+    <value>магазин товаров</value>
+  </data>
+  <data name="Open247" xml:space="preserve">
+    <value>Открыто 24/7/365.</value>
+  </data>
+  <data name="ViewAllProducts" xml:space="preserve">
+    <value>Посмотреть все товары</value>
+  </data>
+  <data name="ShopLocal" xml:space="preserve">
+    <value>Покупайте локально.</value>
+  </data>
+  <data name="ShopLocalDescription" xml:space="preserve">
+    <value>Мы знаем, что во время COVID-19 многие люди в городе и штате чувствуют беспокойство по поводу будущего - мы тоже не уверены, что нас ждет впереди.</value>
+  </data>
+  <data name="ShopLocalDescription2" xml:space="preserve">
+    <value>Тем не менее: мы знаем, что любим следить за тем, чтобы у вас было снаряжение, необходимое для ваших приключений, и мы будем продолжать это делать - с нашей командой - пока город не скажет нам, что мы не можем.</value>
+  </data>
+  <data name="ShopLocalDescription3" xml:space="preserve">
+    <value>Но пока такие люди, как вы, поддерживают малый бизнес в городе, мы будем здесь — каждый день, следя за тем, чтобы ваши заказы прибывали вовремя.</value>
+  </data>
+  <data name="JaneJohnDoe" xml:space="preserve">
+    <value>Джейн и Джон Доу</value>
+  </data>
+  <data name="AcmeOutdoors" xml:space="preserve">
+    <value>Acme Outdoors</value>
+  </data>
+</root>

@@ -1,0 +1,89 @@
+@model ContactViewModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<!-- Секция героя контактов -->
+<div class="contact-hero-section">
+    <div class="contact-hero-bg-wrapper">
+        <div class="container contact">
+            <h1 class="heading">Contact Acme Outdoors</h1>
+            <div class="contact-block-wrapper">
+                <div class="contact-block">
+                    <img src="~/images/chat-alt.svg" alt="" class="contact-icon"/>
+                    <h2>Contact Us</h2>
+                    <p>Just want to say hi? We'd love to hear from you. We love our customers and community!</p>
+                    <a href="#contact" class="btn w-button">Send Us A Message</a>
+                </div>
+                <div class="contact-block">
+                    <img src="~/images/chat-warning.svg" alt="" class="contact-icon"/>
+                    <h2>Get Support</h2>
+                    <p>Have an issue with an order or with a product you purchased from us? Fill out our support form.</p>
+                    <a href="https://university.webflow.com/support" target="_blank" class="btn w-button">Contact Support</a>
+                </div>
+            </div>
+        </div>
+        <div class="contact-image-div"></div>
+    </div>
+</div>
+
+<!-- Секция контактной формы -->
+<div id="contact" class="content-section">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="contact-left">
+                <h2>Contact Us</h2>
+                <div class="w-richtext">
+                    <p>Acme Outdoors<br/>123 Rainy Street<br/>Oklahoma City, OK 73129</p>
+                    <p>‍<br/><strong>General Inquiries:</strong> (405) 555-5555<br/><strong>Customer Support:</strong> (405) 555-5556</p>
+                </div>
+            </div>
+            <div class="contact-right">
+                <h2>Contact Form</h2>
+                <p>Send us a message and we'll get back to you as soon as we can!</p>
+                <div class="w-form">
+                    @using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { @class = "contact-form", id = "email-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name, "Name", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Name, new { @class = "input w-input", @placeholder = "Enter your name", @maxlength = "100" })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, "Email Address", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input w-input", @placeholder = "Enter your email address", @type = "email", @maxlength = "100" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Message, "Your Message", new { @class = "form-label" })
+                            @Html.TextAreaFor(m => m.Message, new { @class = "input w-input", @placeholder = "Enter your message", @maxlength = "5000", @rows = "5" })
+                            @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        <input type="submit" data-wait="Please wait..." class="btn w-button" value="Submit"/>
+                    }
+                    
+                    @if (Model.IsSuccess)
+                    {
+                        <div class="success w-form-done">
+                            <div>@Model.SuccessMessage</div>
+                        </div>
+                    }
+                    
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="error w-form-fail">
+                            <div>Please correct the errors below and try again.</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

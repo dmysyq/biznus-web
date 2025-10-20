@@ -1,0 +1,113 @@
+@model ShopViewModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<!-- Заголовок страницы -->
+<div class="page-title-section">
+    <div class="container">
+        <h1 class="page-title">Shop Our Products</h1>
+    </div>
+</div>
+
+<!-- Рекомендуемый товар -->
+<div class="content-section featured-section">
+    <div class="container">
+        <div class="w-dyn-list">
+            <div role="list" class="w-dyn-items">
+                @if (Model.Products.Any())
+                {
+                    var featuredProduct = Model.Products.First();
+                    <div role="listitem" class="w-dyn-item">
+                        <a style="background-image:url('@Url.Content(featuredProduct.ImageUrl)')" asp-controller="Shop" asp-action="Product" asp-route-id="@featuredProduct.Id" class="featured-wrapper w-inline-block">
+                            <div class="pill-2 badge primary featured">Featured Item</div>
+                            <div class="feature-text-wrapper">
+                                <h3 class="featured-item-name">@featuredProduct.Name</h3>
+                                <div class="featured-price">$@featuredProduct.Price.ToString("F2") USD</div>
+                            </div>
+                            <div class="featured-gradient-overlay"></div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Основная секция магазина -->
+<div class="content-section">
+    <div class="container">
+        <div class="shop-page-wrapper">
+            <!-- Меню категорий -->
+            <div class="shop-category-menu">
+                <h2 class="category-menu-heading">Shop by Category</h2>
+                <div class="w-dyn-list">
+                    <div role="list" class="w-dyn-items">
+                        <div role="listitem" class="category-menu-item w-dyn-item">
+                            <a href="/Shop?category=Gift Cards" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Gift Cards" ? "w--current" : "")">Gift Cards</a>
+                        </div>
+                        <div role="listitem" class="category-menu-item w-dyn-item">
+                            <a href="/Shop?category=Tents" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Tents" ? "w--current" : "")">Tents</a>
+                        </div>
+                        <div role="listitem" class="category-menu-item w-dyn-item">
+                            <a href="/Shop?category=Accessories" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Accessories" ? "w--current" : "")">Accessories</a>
+                        </div>
+                        <div role="listitem" class="category-menu-item w-dyn-item">
+                            <a href="/Shop?category=Packs" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Packs" ? "w--current" : "")">Packs</a>
+                        </div>
+                        <div role="listitem" class="category-menu-item w-dyn-item">
+                            <a href="/Shop" class="btn dark outline cat-menu w-button @(string.IsNullOrEmpty(Model.SelectedCategory) ? "w--current" : "")">All Products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Список товаров -->
+            <div class="shop-list">
+                <div class="products-list-wrapper w-dyn-list">
+                    <div role="list" class="products-list w-dyn-items">
+                        @if (Model.Products.Any())
+                        {
+                            @foreach (var product in Model.Products)
+                            {
+                                <div role="listitem" class="w-dyn-item">
+                                    <div class="shop-item-wrapper">
+                                        <a asp-controller="Shop" asp-action="Product" asp-route-id="@product.Id" class="shop-item-link-wrapper w-inline-block">
+                                            <div style="background-image:url('@Url.Content(product.ImageUrl)')" class="shop-image tumbler-1 narrow-list">
+                                                @if (product.Price < 100)
+                                                {
+                                                    <div class="pill-2 badge primary sale">Sale</div>
+                                                }
+                                            </div>
+                                            <div class="shop-details-wrapper">
+                                                <div class="shop-details-left">
+                                                    <div class="shop-item-name">@product.Name</div>
+                                                    <div class="price-wrapper">
+                                                        <div class="shop-item-price">$@product.Price.ToString("F2") USD</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="shop-button-wrapper">
+                                            <a asp-controller="Shop" asp-action="Product" asp-route-id="@product.Id" class="btn w-button">Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="no-products">
+                                <h2>No products found</h2>
+                                <p>Try adjusting your search or filter criteria.</p>
+                                <a href="/Shop" class="btn w-button">View All Products</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

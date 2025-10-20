@@ -1,0 +1,210 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!-- Секция входа -->
+<div class="content-section">
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="auth-content">
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to your account to continue</p>
+
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "auth-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.ReturnUrl)
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input w-input", @type = "email", @placeholder = "Enter your email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Password, new { @class = "input w-input", @type = "password", @placeholder = "Enter your password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox-input" })
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox-label" })
+                    </div>
+
+                    <button type="submit" class="btn w-button auth-button">Sign In</button>
+                }
+
+                <div class="auth-links">
+                    <p>Don't have an account? <a href="@Url.Action("Register", "Account")" class="auth-link">Sign up here</a></p>
+                </div>
+
+                <div class="test-credentials">
+                    <h4>Test Credentials:</h4>
+                    <p><strong>User 1:</strong> test@example.com / password123</p>
+                </div>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="auth-errors">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div class="error-message">@error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .auth-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        padding: 2rem 0;
+    }
+
+    .auth-content {
+        background: white;
+        padding: 3rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .auth-title {
+        text-align: center;
+        color: #333;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e1e5e9;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .input:focus {
+        outline: none;
+        border-color: #4ecdc4;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .checkbox-input {
+        margin-right: 0.5rem;
+    }
+
+    .checkbox-label {
+        margin: 0;
+        color: #666;
+    }
+
+    .auth-button {
+        width: 100%;
+        background: #4ecdc4;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .auth-button:hover {
+        background: #45b7aa;
+    }
+
+    .auth-links {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    .auth-link {
+        color: #4ecdc4;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .auth-link:hover {
+        text-decoration: underline;
+    }
+
+    .auth-errors {
+        margin-top: 1rem;
+    }
+
+    .error-message {
+        background: #ffebee;
+        color: #c62828;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .text-danger {
+        color: #c62828;
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+    }
+
+    .test-credentials {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 5px;
+        border-left: 4px solid #4ecdc4;
+    }
+
+    .test-credentials h4 {
+        margin: 0 0 0.5rem 0;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .test-credentials p {
+        margin: 0.25rem 0;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    @@media (max-width: 768px) {
+        .auth-content {
+            padding: 2rem;
+            margin: 1rem;
+        }
+    }
+</style>

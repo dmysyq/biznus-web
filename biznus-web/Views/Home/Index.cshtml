@@ -1,0 +1,139 @@
+@model HomeViewModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Герой секция -->
+<div class="hero-section">
+    <div class="container">
+        <div class="hero-wrapper">
+            <h1 class="hero-heading">@localizer["ServingSince"]</h1>
+            <p class="hero-paragraph">@localizer["HeroDescription"]</p>
+            <div class="hero-button-wrapper">
+                <a asp-controller="Shop" asp-action="Index" class="btn light outline w-button">@localizer["ShopMerch"]</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Секция поддержки -->
+<div class="support-section">
+    <div class="container">
+        <div class="support-top-wrapper">
+            <div class="support-top-left">
+                <div class="support-top-details-text">@localizer["WaysToSupport"]</div>
+                <h2 class="support-top-heading">@localizer["SupportAcmeOutdoors"]</h2>
+            </div>
+            <div class="support-top-right">
+                <p>@localizer["CovidDescription"]</p>
+            </div>
+        </div>
+        <div class="support-wrapper">
+            <div class="support-column">
+                <div class="support-square">
+                    <div class="support-square-number">01</div>
+                    <div class="support-square-text">@localizer["ShopProducts"]</div>
+                    <img src="~/images/circle.svg" alt="Circle Decoration in Shop Products Block" class="support-square-image" />
+                </div>
+                <p>@localizer["ShopProductsDescription"]</p>
+            </div>
+            <div class="support-column">
+                <div class="support-square">
+                    <div class="support-square-number">02</div>
+                    <div class="support-square-text">@localizer["Donate"]</div>
+                    <img src="~/images/triangle.svg" alt="Triangle Decoration in Donate Block" class="support-square-image triangle" />
+                </div>
+                <p>@localizer["DonateDescription"]</p>
+            </div>
+            <div class="support-column">
+                <div class="support-square">
+                    <div class="support-square-number">03</div>
+                    <div class="support-square-text">@localizer["BuyGiftCards"]</div>
+                    <img src="~/images/rectangle.svg" alt="Rectangle Decoration in Buy Gift Cards Block" class="support-square-image rectangle" />
+                </div>
+                <p>@localizer["BuyGiftCardsDescription"]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Секция безопасности -->
+<div class="safe-section">
+    <div class="container">
+        <div class="safe-wrapper">
+            <h2 class="safe-heading">@localizer["CovidSafety"]</h2>
+            <p class="safe-paragraph">@localizer["CovidSafetyDescription"]</p>
+            <div class="safe-button-wrapper">
+                <a href="/alert/how-were-responding-to-covid-19" class="btn light hero safe w-button">@localizer["ReadStatement"]</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Секция товаров -->
+<div class="products-section">
+    <div class="container">
+        <div class="shop-top-wrapper">
+            <div class="support-top-left">
+                <div class="support-top-details-text">@localizer["ShopProductsTitle"]</div>
+                <h2 class="support-top-heading">@localizer["Open247"]</h2>
+            </div>
+            <div class="support-top-right"></div>
+        </div>
+        <div class="products-list-wrapper w-dyn-list">
+            <div role="list" class="products-list w-dyn-items">
+                @foreach (var product in Model.FeaturedProducts)
+                {
+                    <div role="listitem" class="w-dyn-item">
+                        <div class="shop-item-wrapper">
+                            <a asp-controller="Shop" asp-action="Product" asp-route-id="@product.Id" class="shop-item-link-wrapper w-inline-block">
+                                <div style="background-image:url('@Url.Content(product.ImageUrl)')" class="shop-image tumbler-1">
+                                    @if (product.Price < 100)
+                                    {
+                                        <div class="pill-2 badge primary sale">Sale</div>
+                                    }
+                                </div>
+                                <div class="shop-details-wrapper">
+                                    <div class="shop-details-left">
+                                        <div class="shop-item-name">@product.Name</div>
+                                        <div class="price-wrapper">
+                                            <div class="shop-item-price">$@product.Price.ToString("F2") USD</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="shop-button-wrapper">
+                                <a asp-controller="Shop" asp-action="Product" asp-route-id="@product.Id" class="btn w-button">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="shop-more">
+            <a asp-controller="Shop" asp-action="Index" class="btn dark w-button">@localizer["ViewAllProducts"]</a>
+        </div>
+    </div>
+</div>
+
+<!-- Секция "Shop Local" -->
+<div class="shop-local-section">
+    <div class="container shop-local-container">
+        <div class="shop-local-wrapper">
+            <div class="shop-local-left"></div>
+            <div class="shop-local-right">
+                <div class="shop-local-content-wrapper">
+                    <h2 class="shop-local-heading">@localizer["ShopLocal"]</h2>
+                    <p>@localizer["ShopLocalDescription"]</p>
+                    <p>@localizer["ShopLocalDescription2"]</p>
+                    <p>@localizer["ShopLocalDescription3"]</p>
+                    <p>-------</p>
+                    <div>@localizer["JaneJohnDoe"]</div>
+                    <div><strong>@localizer["AcmeOutdoors"]</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

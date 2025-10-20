@@ -1,0 +1,215 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!-- Секция регистрации -->
+<div class="content-section">
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="auth-content">
+                <h1 class="auth-title">Create Account</h1>
+                <p class="auth-subtitle">Join us today and start your adventure</p>
+
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "auth-form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FirstName, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "input w-input", @placeholder = "First name" })
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LastName, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "input w-input", @placeholder = "Last name" })
+                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input w-input", @type = "email", @placeholder = "Enter your email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Password, new { @class = "input w-input", @type = "password", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "input w-input", @type = "password", @placeholder = "Confirm password" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        @Html.CheckBoxFor(m => m.AgreeToTerms, new { @class = "checkbox-input" })
+                        @Html.LabelFor(m => m.AgreeToTerms, new { @class = "checkbox-label" })
+                        @Html.ValidationMessageFor(m => m.AgreeToTerms, "", new { @class = "text-danger" })
+                    </div>
+
+                    <button type="submit" class="btn w-button auth-button">Create Account</button>
+                }
+
+                <div class="auth-links">
+                    <p>Already have an account? <a href="@Url.Action("Login", "Account")" class="auth-link">Sign in here</a></p>
+                </div>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="auth-errors">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div class="error-message">@error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .auth-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        padding: 2rem 0;
+    }
+
+    .auth-content {
+        background: white;
+        padding: 3rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .auth-title {
+        text-align: center;
+        color: #333;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 2rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e1e5e9;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .input:focus {
+        outline: none;
+        border-color: #4ecdc4;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .checkbox-input {
+        margin-right: 0.5rem;
+    }
+
+    .checkbox-label {
+        margin: 0;
+        color: #666;
+    }
+
+    .auth-button {
+        width: 100%;
+        background: #4ecdc4;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .auth-button:hover {
+        background: #45b7aa;
+    }
+
+    .auth-links {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    .auth-link {
+        color: #4ecdc4;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .auth-link:hover {
+        text-decoration: underline;
+    }
+
+    .auth-errors {
+        margin-top: 1rem;
+    }
+
+    .error-message {
+        background: #ffebee;
+        color: #c62828;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .text-danger {
+        color: #c62828;
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+    }
+
+    @@media (max-width: 768px) {
+        .auth-content {
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
