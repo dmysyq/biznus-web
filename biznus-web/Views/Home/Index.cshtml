@@ -9,10 +9,10 @@
 <div class="hero-section">
     <div class="container">
         <div class="hero-wrapper">
-            <h1 class="hero-heading">@(localizer["ServingSince"] ?? "Обслуживаем вас с 1989 года.")</h1>
-            <p class="hero-paragraph">@(localizer["HeroDescription"] ?? "Acme Outdoors - это магазин для активного отдыха и приключений, расположенный в районе Boathouse District в Оклахома-Сити.")</p>
+            <h1 class="hero-heading">@(localizer["ServingSince"] )</h1>
+            <p class="hero-paragraph">@(localizer["HeroDescription"] )</p>
             <div class="hero-button-wrapper">
-                <a asp-controller="Shop" asp-action="Index" class="btn light outline w-button">@(localizer["ShopMerch"] ?? "Магазин товаров")</a>
+                <a asp-controller="Shop" asp-action="Index" class="btn light outline w-button">@(localizer["ShopMerch"])</a>
             </div>
         </div>
     </div>
@@ -23,37 +23,37 @@
     <div class="container">
         <div class="support-top-wrapper">
             <div class="support-top-left">
-                <div class="support-top-details-text">@(localizer["WaysToSupport"] ?? "Способы поддержки")</div>
-                <h2 class="support-top-heading">@(localizer["SupportAcmeOutdoors"] ?? "Поддержите Acme Outdoors.")</h2>
+                <div class="support-top-details-text">@(localizer["WaysToSupport"])</div>
+                <h2 class="support-top-heading">@(localizer["SupportAcmeOutdoors"])</h2>
             </div>
             <div class="support-top-right">
-                <p>@(localizer["CovidDescription"] ?? "COVID-19 заставил нас закрыть наше торговое пространство, но нам нужна поддержка от таких покровителей, как вы, сейчас больше, чем когда-либо. Ниже мы перечислили лучшие способы помочь нам в этот сезон.")</p>
+                <p>@(localizer["CovidDescription"])</p>
             </div>
         </div>
         <div class="support-wrapper">
             <div class="support-column">
                 <div class="support-square">
                     <div class="support-square-number">01</div>
-                    <div class="support-square-text">@(localizer["ShopProducts"] ?? "ПОКУПАЙТЕ<br/>ТОВАРЫ")</div>
+                    <div class="support-square-text">@(localizer["ShopProducts"])</div>
                     <img src="~/images/circle.svg" alt="Circle Decoration in Shop Products Block" class="support-square-image" />
                 </div>
-                <p>@(localizer["ShopProductsDescription"] ?? "Наша полная линейка продуктов по-прежнему доступна онлайн здесь, на нашем сайте! Выход на улицу и походы - это то, что вы все еще можете делать. Получите свое снаряжение сейчас!")</p>
+                <p>@(localizer["ShopProductsDescription"])</p>
             </div>
             <div class="support-column">
                 <div class="support-square">
                     <div class="support-square-number">02</div>
-                    <div class="support-square-text">@(localizer["Donate"] ?? "Пожертвовать")</div>
+                    <div class="support-square-text">@(localizer["Donate"])</div>
                     <img src="~/images/triangle.svg" alt="Triangle Decoration in Donate Block" class="support-square-image triangle" />
                 </div>
-                <p>@(localizer["DonateDescription"] ?? "Поскольку мы изменили способ работы только на онлайн, и чтобы обеспечить вашу безопасность, не весь наш персонал работает. Пожертвуйте, чтобы поддержать их на плаву.")</p>
+                <p>@(localizer["DonateDescription"]) </p>
             </div>
             <div class="support-column">
                 <div class="support-square">
                     <div class="support-square-number">03</div>
-                    <div class="support-square-text">@(localizer["BuyGiftCards"] ?? "ПОКУПАЙТЕ<br/>ПОДАРОЧНЫЕ КАРТЫ")</div>
+                    <div class="support-square-text">@(localizer["BuyGiftCards"]) </div>
                     <img src="~/images/rectangle.svg" alt="Rectangle Decoration in Buy Gift Cards Block" class="support-square-image rectangle" />
                 </div>
-                <p>@(localizer["BuyGiftCardsDescription"] ?? "У вас есть все необходимое снаряжение для активного отдыха? Купите подарочную карту и используйте ее позже или поделитесь с друзьями и семьей.")</p>
+                <p>@(localizer["BuyGiftCardsDescription"]) </p>
             </div>
         </div>
     </div>
@@ -63,10 +63,10 @@
 <div class="safe-section">
     <div class="container">
         <div class="safe-wrapper">
-                <h2 class="safe-heading">@(localizer["CovidSafety"] ?? "Как мы обеспечиваем вашу безопасность во время COVID-19")</h2>
-                <p class="safe-paragraph">@(localizer["CovidSafetyDescription"] ?? "Как магазин для активного отдыха, мы приняли меры предосторожности для обеспечения безопасности всех наших клиентов и членов команды.")</p>
+                <h2 class="safe-heading">@(localizer["CovidSafety"]) </h2>
+                <p class="safe-paragraph">@(localizer["CovidSafetyDescription"]) </p>
                 <div class="safe-button-wrapper">
-                    <a href="/alert/how-were-responding-to-covid-19" class="btn light hero safe w-button">@(localizer["ReadStatement"] ?? "Прочитать наше заявление")</a>
+                    <a href="/alert/how-were-responding-to-covid-19" class="btn light hero safe w-button">@(localizer["ReadStatement"]) </a>
             </div>
         </div>
     </div>
@@ -77,8 +77,8 @@
     <div class="container">
         <div class="shop-top-wrapper">
             <div class="support-top-left">
-                    <div class="support-top-details-text">@(localizer["ShopProductsTitle"] ?? "покупайте товары")</div>
-                    <h2 class="support-top-heading">@(localizer["Open247"] ?? "Открыто 24/7/365.")</h2>
+                    <div class="support-top-details-text">@(localizer["ShopProductsTitle"]) </div>
+                    <h2 class="support-top-heading">@(localizer["Open247"]) </h2>
             </div>
             <div class="support-top-right"></div>
         </div>
@@ -113,7 +113,7 @@
             </div>
         </div>
             <div class="shop-more">
-                <a asp-controller="Shop" asp-action="Index" class="btn dark w-button">@(localizer["ViewAllProducts"] ?? "Посмотреть все товары")</a>
+                <a asp-controller="Shop" asp-action="Index" class="btn dark w-button">@(localizer["ViewAllProducts"]) </a>
             </div>
     </div>
 </div>
@@ -125,13 +125,13 @@
             <div class="shop-local-left"></div>
             <div class="shop-local-right">
                 <div class="shop-local-content-wrapper">
-                        <h2 class="shop-local-heading">@(localizer["ShopLocal"] ?? "Покупайте местное.")</h2>
-                        <p>@(localizer["ShopLocalDescription"] ?? "Мы знаем, что во время COVID-19 многие жители города и штата чувствуют себя неуверенно в отношении будущего - мы тоже не уверены, что нас ждет.")</p>
-                        <p>@(localizer["ShopLocalDescription2"] ?? "Тем не менее: мы знаем, что нам нравится убеждаться, что у вас есть снаряжение, необходимое для ваших приключений, и мы будем продолжать это делать - с нашей командой - пока город не скажет нам, что мы не можем.")</p>
-                        <p>@(localizer["ShopLocalDescription3"] ?? "Но пока такие люди, как вы, поддерживают малый бизнес по всему городу, мы будем здесь — каждый день, следя за тем, чтобы ваши заказы прибывали вовремя.")</p>
+                        <h2 class="shop-local-heading">@(localizer["ShopLocal"]) </h2>
+                        <p>@(localizer["ShopLocalDescription"]) </p>
+                        <p>@(localizer["ShopLocalDescription2"]) </p>
+                        <p>@(localizer["ShopLocalDescription3"]) </p>
                         <p>-------</p>
-                        <div>@(localizer["JaneJohnDoe"] ?? "Джейн и Джон Доу")</div>
-                        <div><strong>@(localizer["AcmeOutdoors"] ?? "Acme Outdoors")</strong></div>
+                        <div>@(localizer["JaneJohnDoe"]) </div>
+                        <div><strong>@(localizer["AcmeOutdoors"])</strong></div>
                 </div>
             </div>
         </div>
