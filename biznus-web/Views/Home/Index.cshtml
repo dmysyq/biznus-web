@@ -1,8 +1,10 @@
 @model HomeViewModel
-@using Microsoft.Extensions.Localization
-@inject IStringLocalizer<biznus_web.Controllers.HomeController> localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Home";
+
 }
 
 <!-- Герой секция -->

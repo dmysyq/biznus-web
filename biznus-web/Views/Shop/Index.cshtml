@@ -1,4 +1,6 @@
 @model ShopViewModel
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<biznus_web.Controllers.ShopController> localizer
 @{
     ViewData["Title"] = "Shop";
 }
@@ -6,7 +8,7 @@
 <!-- Заголовок страницы -->
 <div class="page-title-section">
     <div class="container">
-        <h1 class="page-title">Shop Our Products</h1>
+        <h1 class="page-title">@(localizer["ShopOurProducts"])</h1>
     </div>
 </div>
 
@@ -20,7 +22,7 @@
                     var featuredProduct = Model.Products.First();
                     <div role="listitem" class="w-dyn-item">
                         <a style="background-image:url('@Url.Content(featuredProduct.ImageUrl)')" asp-controller="Shop" asp-action="Product" asp-route-id="@featuredProduct.Id" class="featured-wrapper w-inline-block">
-                            <div class="pill-2 badge primary featured">Featured Item</div>
+                            <div class="pill-2 badge primary featured">@(localizer["FeaturedItem"])</div>
                             <div class="feature-text-wrapper">
                                 <h3 class="featured-item-name">@featuredProduct.Name</h3>
                                 <div class="featured-price">$@featuredProduct.Price.ToString("F2") USD</div>
@@ -40,23 +42,23 @@
         <div class="shop-page-wrapper">
             <!-- Меню категорий -->
             <div class="shop-category-menu">
-                <h2 class="category-menu-heading">Shop by Category</h2>
+                <h2 class="category-menu-heading">@(localizer["ShopByCategory"])</h2>
                 <div class="w-dyn-list">
                     <div role="list" class="w-dyn-items">
                         <div role="listitem" class="category-menu-item w-dyn-item">
-                            <a href="/Shop?category=Gift Cards" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Gift Cards" ? "w--current" : "")">Gift Cards</a>
+                            <a href="/Shop?category=Gift Cards" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Gift Cards" ? "w--current" : "")">@(localizer["GiftCards"])</a>
                         </div>
                         <div role="listitem" class="category-menu-item w-dyn-item">
-                            <a href="/Shop?category=Tents" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Tents" ? "w--current" : "")">Tents</a>
+                            <a href="/Shop?category=Tents" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Tents" ? "w--current" : "")">@(localizer["Tents"])</a>
                         </div>
                         <div role="listitem" class="category-menu-item w-dyn-item">
-                            <a href="/Shop?category=Accessories" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Accessories" ? "w--current" : "")">Accessories</a>
+                            <a href="/Shop?category=Accessories" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Accessories" ? "w--current" : "")">@(localizer["Accessories"])</a>
                         </div>
                         <div role="listitem" class="category-menu-item w-dyn-item">
-                            <a href="/Shop?category=Packs" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Packs" ? "w--current" : "")">Packs</a>
+                            <a href="/Shop?category=Packs" class="btn dark outline cat-menu w-button @(Model.SelectedCategory == "Packs" ? "w--current" : "")">@(localizer["Packs"])</a>
                         </div>
                         <div role="listitem" class="category-menu-item w-dyn-item">
-                            <a href="/Shop" class="btn dark outline cat-menu w-button @(string.IsNullOrEmpty(Model.SelectedCategory) ? "w--current" : "")">All Products</a>
+                            <a href="/Shop" class="btn dark outline cat-menu w-button @(string.IsNullOrEmpty(Model.SelectedCategory) ? "w--current" : "")">@(localizer["AllProducts"])</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +78,7 @@
                                             <div style="background-image:url('@Url.Content(product.ImageUrl)')" class="shop-image tumbler-1 narrow-list">
                                                 @if (product.Price < 100)
                                                 {
-                                                    <div class="pill-2 badge primary sale">Sale</div>
+                                                    <div class="pill-2 badge primary sale">@(localizer["Sale"])</div>
                                                 }
                                             </div>
                                             <div class="shop-details-wrapper">
@@ -89,7 +91,7 @@
                                             </div>
                                         </a>
                                         <div class="shop-button-wrapper">
-                                            <a asp-controller="Shop" asp-action="Product" asp-route-id="@product.Id" class="btn w-button">Details</a>
+                                            <a asp-controller="Shop" asp-action="Product" asp-route-id="@product.Id" class="btn w-button">@(localizer["Details"])</a>
                                         </div>
                                     </div>
                                 </div>
@@ -98,9 +100,9 @@
                         else
                         {
                             <div class="no-products">
-                                <h2>No products found</h2>
-                                <p>Try adjusting your search or filter criteria.</p>
-                                <a href="/Shop" class="btn w-button">View All Products</a>
+                                <h2>@(localizer["NoProductsFound"])</h2>
+                                <p>@(localizer["NoProductsDescription"])</p>
+                                <a href="/Shop" class="btn w-button">@(localizer["ViewAllProducts"])</a>
                             </div>
                         }
                     </div>

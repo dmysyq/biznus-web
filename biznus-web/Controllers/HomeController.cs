@@ -1,10 +1,8 @@
 using biznus_web.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using System.Diagnostics;
-using System.Linq;
 
 namespace biznus_web.Controllers
 {
@@ -52,7 +50,6 @@ namespace biznus_web.Controllers
 
         private List<Product> GetFeaturedProducts()
         {
-            // Данные на основе HTML шаблона
             return new List<Product>
             {
                 new Product { Id = 1, Name = "White Tent", Price = 200.00m, ImageUrl = "~/images/patrick-hendry-edguygu93yw-unsplash.jpg", Category = "Tents", Description = "A reliable tent for your outdoor adventures" },

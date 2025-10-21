@@ -24,14 +24,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
     options.SupportedCultures = supportedCulture;
     options.SupportedUICultures = supportedCulture;
-    
-    options.RequestCultureProviders.Clear();
-    options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
-    options.RequestCultureProviders.Add(new QueryStringRequestCultureProvider());
-    options.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
 });
 
-// Настройка аутентификации через cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -45,7 +39,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
     });
 
-// Добавляем сервисы для работы с сессиями
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -54,9 +47,23 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+var supportedCulture = new[]
+{
+        new CultureInfo("en-US"),
+        new CultureInfo("ru-RU"),
+        new CultureInfo("kk-KZ"),
+        new CultureInfo("fr-FR")
+     };
+
+    options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
+    options.SupportedCultures = supportedCulture;
+    options.SupportedUICultures = supportedCulture;
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

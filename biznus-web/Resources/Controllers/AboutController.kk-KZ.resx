@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="YourAdventureAwaits" xml:space="preserve">
+    <value>Сіздің шытырман оқиғаңыз<br/>күтеді</value>
+  </data>
+  <data name="AboutDescription" xml:space="preserve">
+    <value>Acme Outdoors бүгін бастауға көмектесетін барлық қажетті заттарға ие. Келесі шытырман оқиғаңызды толық ететін жабдықтардың керемет жинағымен танысыңыз.</value>
+  </data>
+  <data name="ShopMerch" xml:space="preserve">
+    <value>Тауарлар дүкені</value>
+  </data>
+  <data name="WhyAcmeOutdoors" xml:space="preserve">
+    <value>Неге Acme Outdoors?</value>
+  </data>
+  <data name="BestInBusiness" xml:space="preserve">
+    <value>Біз саладағы ең жақсымыз.</value>
+  </data>
+  <data name="BestInBusinessDescription" xml:space="preserve">
+    <value>30 жылдан астам уақыт бойы біз Оклахома бойынша жол көрсетіп келе жатырмыз — 1989 жылдан бері мүмкін болатын ең жақсы клиенттік тәжірибе жасаймыз.</value>
+  </data>
+  <data name="LifetimeWarranty" xml:space="preserve">
+    <value>Өмір бойы кепілдік</value>
+  </data>
+  <data name="LifetimeWarrantyDescription" xml:space="preserve">
+    <value>Біздің барлық өнімдеріміз — оларды жасаймыз ба, жоқ па — өмір бойы кепілдігімізбен қорғалған.</value>
+  </data>
+  <data name="ShoppingExperience" xml:space="preserve">
+    <value>Сатып алу тәжірибесі</value>
+  </data>
+  <data name="ShoppingExperienceDescription" xml:space="preserve">
+    <value>Біз достық қызмет пен сапалы өнімдермен ең жақсы сатып алу тәжірибесін ұсынуға тырысамыз.</value>
+  </data>
+  <data name="OnTimeDelivery" xml:space="preserve">
+    <value>Уақтылы жеткізу</value>
+  </data>
+  <data name="OnTimeDeliveryDescription" xml:space="preserve">
+    <value>Біз барлық тапсырыстарыңыздың уақтылы жеткізілуін кепілдейміз.</value>
+  </data>
+  <data name="BestInClassService" xml:space="preserve">
+    <value>Сыныптағы ең жақсы қызмет</value>
+  </data>
+  <data name="BestInClassServiceDescription" xml:space="preserve">
+    <value>Біздің мамандар тобы кез келген сұрақтар мен қажеттіліктерге көмектесуге дайын.</value>
+  </data>
+  <data name="MeetTheOwners" xml:space="preserve">
+    <value>Иелермен танысыңыз</value>
+  </data>
+  <data name="OwnersStory" xml:space="preserve">
+    <value>Джон мен Джейн Непалдағы туристік саяхатта кездесті. Джон, бұрынғы қой қырқушы, өмірдегі келесі шытырман оқиғалары туралы анықтық алу үшін саяхатқа шықты. Джейн — Peloton нұсқаушысы — Непал ландшафтын зерттеу үшін саяхатқа шықты.<br/><br/>Саяхат кезінде Джон мен Джейн олардың бір ортақ махаббаты бар екенін түсінді — жүру мен ашық ауада болуға деген махаббат.<br/><br/>Оклахома штатына оралғанда, Джон мен Джейн олардың құмарлықтарына орталықтаған дүкен ашу жоспарын жасады.<br/><br/>Джон тауарларды іздеу мен клиенттерге қызмет көрсетумен айналысқанда, Джейн веб + электрондық коммерция жағына назар аударды, бұл веб-сайтты вебтегі ең жақсы дизайн платформасында — Webflow-та құрды!<br/><br/>1989 жылы Джон мен Джейн Доу ресми түрде Acme Outdoors-ты іске қосты, штат бойынша ашық ауа әуесқойлары үшін премьер дүкен.<br/><br/>Бүгінгі күнге дейін Джон мен Джейн өздерінің түбірлерін және қайдан келгендерін ұмытпау үшін жыл сайын Непалға оралады.</value>
+  </data>
+  <data name="JohnDoe" xml:space="preserve">
+    <value>Джон Доу</value>
+  </data>
+  <data name="JaneDoe" xml:space="preserve">
+    <value>Джейн Доу</value>
+  </data>
+  <data name="OwnerBio" xml:space="preserve">
+    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</value>
+  </data>
+  <data name="NeedHelp" xml:space="preserve">
+    <value>Көмек керек пе?</value>
+  </data>
+  <data name="NeedHelpDescription" xml:space="preserve">
+    <value>Көмек немесе қолдау керек пе? Біздің команда сізге қажетті көмекті алатыныңызға көз жеткізу үшін дайын тұр. Тапсырысты өзгерту немесе жеткізу мәліметтерін реттеу керек болса да, біз көмектесуге дайынбыз!</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>Қолдау қызметімен байланысу</value>
+  </data>
+</root>

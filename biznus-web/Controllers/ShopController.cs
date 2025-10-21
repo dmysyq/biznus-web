@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using biznus_web.Models;
 
 namespace biznus_web.Controllers
@@ -6,10 +7,12 @@ namespace biznus_web.Controllers
     public class ShopController : Controller
     {
         private readonly ILogger<ShopController> _logger;
+        private readonly IStringLocalizer<ShopController> _stringLocalizer;
 
-        public ShopController(ILogger<ShopController> logger)
+        public ShopController(ILogger<ShopController> logger, IStringLocalizer<ShopController> stringLocalizer)
         {
             _logger = logger;
+            _stringLocalizer = stringLocalizer;
         }
 
         public IActionResult Index(string category, string search, int page = 1)
