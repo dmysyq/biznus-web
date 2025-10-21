@@ -25,8 +25,6 @@ namespace biznus_web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(ContactViewModel model)
         {
-            _logger.LogInformation("Contact form submitted. Name: {Name}, Email: {Email}", 
-                model.Name, model.Email);
             
             if (ModelState.IsValid)
             {

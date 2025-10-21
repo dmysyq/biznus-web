@@ -192,8 +192,8 @@ namespace biznus_web.Controllers
                 var testUser1 = new AppUser
                 {
                     Id = "test-user-1",
-                    FirstName = "John",
-                    LastName = "Doe",
+                    FirstName = "Sakishov",
+                    LastName = "Aldiyar",
                     Email = "test@example.com",
                     UserName = "test@example.com",
                     PasswordHash = HashPassword("password123"),
@@ -201,19 +201,6 @@ namespace biznus_web.Controllers
                     IsActive = true
                 };
                 _users[testUser1.Id] = testUser1;
-
-                var testUser2 = new AppUser
-                {
-                    Id = "test-user-2",
-                    FirstName = "Jane",
-                    LastName = "Smith",
-                    Email = "jane@example.com",
-                    UserName = "jane@example.com",
-                    PasswordHash = HashPassword("test123"),
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                };
-                _users[testUser2.Id] = testUser2;
 
                 _logger.LogInformation("Test users created: test@example.com and jane@example.com");
             }
