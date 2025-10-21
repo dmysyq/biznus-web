@@ -20,6 +20,7 @@ namespace biznus_web.Controllers
 
         public IActionResult Index()
         {
+            var test = _stringLocalizer["Home"];
             _logger.LogInformation("User accessed home page");
             var viewModel = new HomeViewModel
             {

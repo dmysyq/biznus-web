@@ -78,6 +78,7 @@ var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture("ru-RU")
     .AddSupportedCultures(supportedCulture)
     .AddSupportedUICultures(supportedCulture);
+
 app.UseRequestLocalization(localizationOptions);
 
 app.UseRouting();
