@@ -130,4 +130,7 @@
   <data name="AcmeOutdoors" xml:space="preserve">
     <value>Acme Outdoors</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
 </root>

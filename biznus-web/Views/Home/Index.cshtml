@@ -4,8 +4,22 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Home";
-
 }
+
+<!-- Отладочная информация -->
+<div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border: 1px solid #ccc;">
+    <strong>Отладка локализации:</strong><br/>
+    Текущая культура: @ViewData["CurrentCulture"]<br/>
+    UI Культура: @ViewData["CurrentUICulture"]<br/>
+    <br/>
+    <strong>Из контроллера (ViewData):</strong><br/>
+    TestHome: @ViewData["TestHome"]<br/>
+    TestServingSince: @ViewData["TestServingSince"]<br/>
+    <br/>
+    <strong>Из ViewLocalizer:</strong><br/>
+    ViewLocalizer Home: @localizer["Home"]<br/>
+    ViewLocalizer ServingSince: @localizer["ServingSince"]
+</div>
 
 <!-- Герой секция -->
 <div class="hero-section">

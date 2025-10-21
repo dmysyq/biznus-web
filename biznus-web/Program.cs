@@ -1,6 +1,9 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+using biznus_web.Models;
+
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,19 +14,24 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+var supportedCultures = new[]
+{
+    new CultureInfo("en-US"),
+    new CultureInfo("ru-RU"),
+    new CultureInfo("kk-KZ"),
+    new CultureInfo("fr-FR")
+};
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var supportedCulture = new[]
-    {
-        new CultureInfo("en-US"),
-        new CultureInfo("ru-RU"),
-        new CultureInfo("kk-KZ"),
-        new CultureInfo("fr-FR")
-    };
-
     options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
-    options.SupportedCultures = supportedCulture;
-    options.SupportedUICultures = supportedCulture;
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    
+    options.RequestCultureProviders.Clear();
+    options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+    options.RequestCultureProviders.Add(new QueryStringRequestCultureProvider());
+    options.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -47,21 +55,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-var supportedCulture = new[]
-{
-        new CultureInfo("en-US"),
-        new CultureInfo("ru-RU"),
-        new CultureInfo("kk-KZ"),
-        new CultureInfo("fr-FR")
-     };
-
-    options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
-    options.SupportedCultures = supportedCulture;
-    options.SupportedUICultures = supportedCulture;
-});
-
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -70,14 +63,18 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
-var supportedCulture = new[]
-{
-    "en-US", "ru-RU", "kk-KZ", "fr-FR"
-};
 var localizationOptions = new RequestLocalizationOptions()
-    .SetDefaultCulture("ru-RU")
-    .AddSupportedCultures(supportedCulture)
-    .AddSupportedUICultures(supportedCulture);
+{
+    DefaultRequestCulture = new RequestCulture("ru-RU"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new CookieRequestCultureProvider(),
+        new QueryStringRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    }
+};
 
 app.UseRequestLocalization(localizationOptions);
 
