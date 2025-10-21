@@ -21,19 +21,7 @@ namespace biznus_web.Controllers
         public IActionResult Index()
         {
             var test = _stringLocalizer["Home"];
-            var servingSince = _stringLocalizer["ServingSince"];
-            _logger.LogInformation("User accessed home page. Current culture: {Culture}", System.Globalization.CultureInfo.CurrentCulture.Name);
-            _logger.LogInformation("UI Culture: {UICulture}", System.Globalization.CultureInfo.CurrentUICulture.Name);
-            _logger.LogInformation("String localizer test Home: {TestValue}", test);
-            _logger.LogInformation("String localizer test ServingSince: {ServingSinceValue}", servingSince);
-            _logger.LogInformation("ResourceNotFound: {ResourceNotFound}", _stringLocalizer["Home"].ResourceNotFound);
-            
-            // Добавляем тестовые данные в ViewData для отладки
-            ViewData["TestHome"] = test;
-            ViewData["TestServingSince"] = servingSince;
-            ViewData["CurrentCulture"] = System.Globalization.CultureInfo.CurrentCulture.Name;
-            ViewData["CurrentUICulture"] = System.Globalization.CultureInfo.CurrentUICulture.Name;
-            
+            _logger.LogInformation("User accessed home page");
             var viewModel = new HomeViewModel
             {
                 FeaturedProducts = GetFeaturedProducts(),
@@ -42,7 +30,6 @@ namespace biznus_web.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
         public JsonResult Cookie(string culture)
         {
             _logger.LogInformation("User changed culture to: {Culture}", culture);
