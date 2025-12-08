@@ -58,4 +58,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="HereAtAcme" xml:space="preserve">
+    <value>Ici chez Acme Outdoors</value>
+  </data>
+  <data name="EveryDollarCounts" xml:space="preserve">
+    <value>chaque dollar compte</value>
+  </data>
+  <data name="DonationDescription" xml:space="preserve">
+    <value>Acme Outdoors est plus qu'une simple entreprise, nous sommes une communauté de personnes qui se soucient les unes des autres et de notre ville. Pendant cette période, en raison des ordres de confinement, seuls quelques-uns de nos employés peuvent travailler. Tous les dons que vous ferez à Acme aideront à s'assurer que nos employés sont pris en charge et peuvent rester en sécurité en ces temps incertains.</value>
+  </data>
+  <data name="DonateAmount" xml:space="preserve">
+    <value>Faire un don de ${0}</value>
+  </data>
+  <data name="MakeCustomDonation" xml:space="preserve">
+    <value>Faire un don personnalisé</value>
+  </data>
+  <data name="DonationAmount" xml:space="preserve">
+    <value>Montant du don ($)</value>
+  </data>
+  <data name="YourNameOptional" xml:space="preserve">
+    <value>Votre nom (optionnel)</value>
+  </data>
+  <data name="EmailOptional" xml:space="preserve">
+    <value>E-mail (optionnel)</value>
+  </data>
+  <data name="MessageOptional" xml:space="preserve">
+    <value>Message (optionnel)</value>
+  </data>
+  <data name="MakeDonation" xml:space="preserve">
+    <value>Faire un don</value>
+  </data>
+  <data name="ThankYouDonation" xml:space="preserve">
+    <value>Merci pour votre don de ${0} !</value>
+  </data>
 </root>
+

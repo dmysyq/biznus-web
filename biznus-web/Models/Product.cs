@@ -20,6 +20,9 @@ namespace biznus_web.Models
         public string? ImageUrl { get; set; }
         
         public string? Category { get; set; }
+
+        public int? CategoryId { get; set; }
+        public Category? CategoryRef { get; set; }
         
         public bool IsAvailable { get; set; } = true;
         

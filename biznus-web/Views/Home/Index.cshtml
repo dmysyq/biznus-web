@@ -2,17 +2,15 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer localizer
 @{
-    Layout = "_Layout";
     ViewData["Title"] = "Home";
-
 }
 
 <!-- Герой секция -->
 <div class="hero-section">
     <div class="container">
         <div class="hero-wrapper">
-            <h1 class="hero-heading">@(localizer["ServingSince"] )</h1>
-            <p class="hero-paragraph">@(localizer["HeroDescription"] )</p>
+            <h1 class="hero-heading">@localizer["ServingSince"]</h1>
+            <p class="hero-paragraph">@localizer["HeroDescription"]</p>
             <div class="hero-button-wrapper">
                 <a asp-controller="Shop" asp-action="Index" class="btn light outline w-button">@(localizer["ShopMerch"])</a>
             </div>

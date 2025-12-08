@@ -1,5 +1,3 @@
-@using Microsoft.Extensions.Localization
-@inject IStringLocalizer<biznus_web.Controllers.AboutController> localizer
 @{
     ViewData["Title"] = "About";
 }
@@ -8,10 +6,10 @@
 <div class="hero-section about-hero">
     <div class="container">
         <div class="hero-wrapper">
-            <h1 class="hero-heading anout-hero-heading">@Html.Raw(localizer["YourAdventureAwaits"])</h1>
-            <p class="hero-paragraph">@(localizer["AboutDescription"])</p>
+            <h1 class="hero-heading anout-hero-heading">Your Adventure<br />Awaits</h1>
+            <p class="hero-paragraph">Acme Outdoors has everything you need to help you get started today. Check out our wonderful collection of gear that will make your next adventure complete.</p>
             <div class="hero-button-wrapper">
-                <a href="/shop" class="btn light outline w-button">@(localizer["ShopMerch"])</a>
+                <a href="/shop" class="btn light outline w-button">Shop Merch</a>
             </div>
         </div>
     </div>
@@ -22,9 +20,9 @@
     <div class="container">
         <div class="about-top-block">
             <div class="why-acme-block">
-                <div class="why-acme-small-text">@(localizer["WhyAcmeOutdoors"])</div>
-                <h2 class="why-acme-heading">@(localizer["BestInBusiness"])</h2>
-                <p class="why-acme-paragraph">@(localizer["BestInBusinessDescription"])</p>
+                <div class="why-acme-small-text">Why Acme Outdoors?</div>
+                <h2 class="why-acme-heading">We're the best in the business.</h2>
+                <p class="why-acme-paragraph">From more than 30 years, we've been leading the way across Oklahoma — creating the best possible customer experience since 1989.</p>
             </div>
         </div>
     </div>
@@ -36,23 +34,23 @@
         <div class="about-columns-wrapper">
             <div class="about-column">
                 <img src="~/images/verified.svg" alt="Warranty Icon" class="image" />
-                <h3>@(localizer["LifetimeWarranty"])</h3>
-                <p>@(localizer["LifetimeWarrantyDescription"])</p>
+                <h3>Lifetime Warranty</h3>
+                <p>All our products — whether we make them or not — are backed by our lifetime warranty.</p>
             </div>
             <div class="about-column">
                 <img src="~/images/cart-1.svg" alt="Shopping Cart Icon" class="image" />
-                <h3>@(localizer["ShoppingExperience"])</h3>
-                <p>@(localizer["ShoppingExperienceDescription"])</p>
+                <h3>Shopping Experience</h3>
+                <p>All our products — whether we make them or not — are backed by our lifetime warranty.</p>
             </div>
             <div class="about-column">
                 <img src="~/images/transport.svg" alt="Delivery Icon" class="image" />
-                <h3>@(localizer["OnTimeDelivery"])</h3>
-                <p>@(localizer["OnTimeDeliveryDescription"])</p>
+                <h3>On-time Delivery</h3>
+                <p>All our products — whether we make them or not — are backed by our lifetime warranty.</p>
             </div>
             <div class="about-column">
                 <img src="~/images/chat-alt.svg" alt="Service Icon" class="image" />
-                <h3>@(localizer["BestInClassService"])</h3>
-                <p>@(localizer["BestInClassServiceDescription"])</p>
+                <h3>Best in Class Service</h3>
+                <p>All our products — whether we make them or not — are backed by our lifetime warranty.</p>
             </div>
         </div>
     </div>
@@ -66,8 +64,8 @@
                 <div class="meet-the-owners-left"></div>
                 <div class="meet-the-owners-right">
                     <div class="owners-rich-text w-richtext">
-                        <h2>@(localizer["MeetTheOwners"])</h2>
-                        <p>@Html.Raw(localizer["OwnersStory"])</p>
+                        <h2>Meet the Owners</h2>
+                        <p>John and Jane met on a backpacking adventure in Nepal. John, a former sheep shearer, went on the trip to get some clarity about his next adventures in life. Jane — a Peloton instructor — went on the trip to explore the landscape in Nepal.<br /><br />While on the trip, John and Jane realized that they had one common love — the love for hiking and the love for being outdoors.<br /><br />Returning back to their home state of Oklahoma, John and Jane hatched a plan to launch a retail store centered around their passions. <br /><br />While John handled the sourcing of goods and customer service, Jane focused on the web + e-commerce side of the business, building this website in the best design platform on the web — Webflow!<br /><br />In 1989, John and Jane Doe officially launched Acme Outdoors, the premiere store for outdoor enthusiasts around the state.<br /><br />To this day, John and Jane return to Nepal yearly to ensure that they never forget their roots and where they came from.</p>
                     </div>
                 </div>
             </div>
@@ -83,15 +81,15 @@
                 <div class="owner-avatar-wrapper">
                     <img src="~/images/john-20doe.png" alt="Co-Owner John Doe" />
                 </div>
-                <h3>@(localizer["JohnDoe"])</h3>
-                <p class="owner-bio-paragraph">@(localizer["OwnerBio"])</p>
+                <h3>John Doe</h3>
+                <p class="owner-bio-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
             </div>
             <div class="owner-bio">
                 <div class="owner-avatar-wrapper">
                     <img src="~/images/jane-20doe.png" alt="Co-Owner Jane Doe" />
                 </div>
-                <h3>@(localizer["JaneDoe"])</h3>
-                <p class="owner-bio-paragraph">@(localizer["OwnerBio"])</p>
+                <h3>Jane Doe</h3>
+                <p class="owner-bio-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
             </div>
         </div>
     </div>
@@ -101,10 +99,10 @@
 <div class="hero-section contact-hero">
     <div class="container">
         <div class="hero-wrapper">
-            <h1 class="hero-heading anout-hero-heading">@(localizer["NeedHelp"])</h1>
-            <p class="hero-paragraph">@(localizer["NeedHelpDescription"])</p>
+            <h1 class="hero-heading anout-hero-heading">Need Help?</h1>
+            <p class="hero-paragraph">Need help or assistance? Our team is standing by to make sure you get the help you need. Whether you need to adjust an order or delivery details, we're ready to help!</p>
             <div class="hero-button-wrapper">
-                <a href="/contact" class="btn light outline w-button">@(localizer["ContactSupport"])</a>
+                <a href="/contact" class="btn light outline w-button">Contact Support</a>
             </div>
         </div>
     </div>

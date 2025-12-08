@@ -8,13 +8,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\Views\Contact\**" />
+    <Content Remove="Resources\Views\Contact\**" />
+    <EmbeddedResource Remove="Resources\Views\Contact\**" />
+    <None Remove="Resources\Views\Contact\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\_LanguageSelector.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Controllers\AboutController.en-US.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\AboutController.fr-FR.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\AboutController.kk-KZ.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\AboutController.ru-RU.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\HomeController.en-US.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\HomeController.ru-RU.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\ShopController.en-US.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\ShopController.fr-FR.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\ShopController.kk-KZ.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\ShopController.ru-RU.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Resources\Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="12.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
   </ItemGroup>
 

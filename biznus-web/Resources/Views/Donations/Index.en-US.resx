@@ -58,4 +58,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="HereAtAcme" xml:space="preserve">
+    <value>Here at Acme Outdoors</value>
+  </data>
+  <data name="EveryDollarCounts" xml:space="preserve">
+    <value>every dollar counts</value>
+  </data>
+  <data name="DonationDescription" xml:space="preserve">
+    <value>Acme Outdoors is more than just a company, we're a community of people who care for one another and for our city. During this time, due to shelter in place orders, only a select few of our staff are able to work. Any donations you make to Acme will help make sure our employees are cared for and can stay safe in these uncertain times.</value>
+  </data>
+  <data name="DonateAmount" xml:space="preserve">
+    <value>Donate ${0}</value>
+  </data>
+  <data name="MakeCustomDonation" xml:space="preserve">
+    <value>Make a Custom Donation</value>
+  </data>
+  <data name="DonationAmount" xml:space="preserve">
+    <value>Donation Amount ($)</value>
+  </data>
+  <data name="YourNameOptional" xml:space="preserve">
+    <value>Your Name (Optional)</value>
+  </data>
+  <data name="EmailOptional" xml:space="preserve">
+    <value>Email (Optional)</value>
+  </data>
+  <data name="MessageOptional" xml:space="preserve">
+    <value>Message (Optional)</value>
+  </data>
+  <data name="MakeDonation" xml:space="preserve">
+    <value>Make Donation</value>
+  </data>
+  <data name="ThankYouDonation" xml:space="preserve">
+    <value>Thank you for your donation of ${0}!</value>
+  </data>
 </root>
+

@@ -8,12 +8,18 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
 
+
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<biznus_web.Services.TranslationService>();
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
@@ -28,6 +34,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
     options.SupportedCultures = supportedCulture;
     options.SupportedUICultures = supportedCulture;
+   
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -51,20 +58,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-var supportedCulture = new[]
-{
-        new CultureInfo("en-US"),
-        new CultureInfo("ru-RU"),
-        new CultureInfo("kk-KZ"),
-        new CultureInfo("fr-FR")
-     };
 
-    options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
-    options.SupportedCultures = supportedCulture;
-    options.SupportedUICultures = supportedCulture;
-});
 
 var app = builder.Build();
 
@@ -74,16 +68,14 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
-var supportedCulture = new[]
-{
-    "en-US", "ru-RU", "kk-KZ", "fr-FR"
-};
+var supportedCulture = new[] { "en-US", "kk-KZ", "ru-RU", "fr-FR" };
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture("ru-RU")
     .AddSupportedCultures(supportedCulture)
     .AddSupportedUICultures(supportedCulture);
 
 app.UseRequestLocalization(localizationOptions);
+
 
 app.UseRouting();
 
@@ -99,3 +91,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

@@ -86,7 +86,7 @@
 							@if (User.Identity?.IsAuthenticated == true)
 							{
 								<div class="user-menu">
-									<span class="user-greeting">Hello, @User.FindFirst("FirstName")?.Value!</span>
+									<span class="user-greeting">@User.FindFirst("FirstName")?.Value!</span>
 									<div class="user-dropdown">
 										<a href="@Url.Action("Profile", "Account")" class="user-link">My Profile</a>
 										<form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
@@ -158,7 +158,7 @@
 	<script>
 				$('#CultureList').on('change', function () {
 			 $.ajax({
-				 url: '/home/Cookie',
+				 url: '/Home/Cookie',
 				 data: { culture: $(this).val() },
 				 dataType: 'json',
 				 type: 'POST',

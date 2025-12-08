@@ -250,16 +250,5 @@ namespace biznus_web.Controllers
         {
             return HashPassword(password) == hash;
         }
-        public JsonResult Cookie(string culture)
-        {
-            Response.Cookies
-                .Append(
-
-                CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions { Expires = DateTimeOffset.Now.AddHours(1) }
-                );
-            return Json(culture);
-        }
     }
 }

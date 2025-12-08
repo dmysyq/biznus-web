@@ -1,20 +1,65 @@
-@using Microsoft.AspNetCore.Builder
 @using Microsoft.AspNetCore.Localization
-@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Http.Features
+@using System.Globalization
 
-@inject IOptions<RequestLocalizationOptions> locOptions
 @{
-    var cultureItems = locOptions.Value.SupportedUICultures
-                                    .Select(c => new SelectListItem
-                                    {
-                                        Value = c.Name,
-                                        Text = c.DisplayName
-                                    }).ToList();
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = new[]
+    {
+        new { Value = "en-US", Text = "English", Flag = "🇺🇸" },
+        new { Value = "ru-RU", Text = "Русский", Flag = "🇷🇺" },
+        new { Value = "kk-KZ", Text = "Қазақша", Flag = "🇰🇿" },
+        new { Value = "fr-FR", Text = "Français", Flag = "🇫🇷" }
+    };
 }
 
-<span>
-    <form id="cultureForm" asp-action="Index" method="post">
-        <select id="CultureList" asp-items="cultureItems">
-        </select>
-    </form>
-</span>
+<div class="language-selector">
+    <select id="CultureList" class="language-dropdown">
+        @foreach (var item in cultureItems)
+        {
+            if (requestCulture?.RequestCulture.Culture.Name == item.Value)
+            {
+                <option value="@item.Value" selected="selected">
+                    @item.Flag @item.Text
+                </option>
+            }
+            else
+            {
+                <option value="@item.Value">
+                    @item.Flag @item.Text
+                </option>
+            }
+        }
+    </select>
+</div>
+
+<style>
+    .language-selector {
+        margin-right: 1rem;
+    }
+
+    .language-dropdown {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        color: #333;
+        cursor: pointer;
+        transition: border-color 0.3s;
+    }
+
+    .language-dropdown:hover {
+        border-color: #4ecdc4;
+    }
+
+    .language-dropdown:focus {
+        outline: none;
+        border-color: #4ecdc4;
+        box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);
+    }
+
+    
+    }
+</style>
+
