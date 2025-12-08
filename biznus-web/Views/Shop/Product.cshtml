@@ -32,11 +32,13 @@
                 <div>
                     @if (Model.IsAvailable)
                     {
-                        <form class="w-commerce-commerceaddtocartform">
+                        <form asp-controller="Cart" asp-action="Add" method="post" class="w-commerce-commerceaddtocartform" id="addToCartForm-@Model.Id">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="productId" value="@Model.Id" />
                             <label for="quantity-@Model.Id">@(localizer["Quantity"])</label>
                             <div class="add-to-cart-page-wrapper">
                                 <input type="number" pattern="^[0-9]+$" inputMode="numeric" id="quantity-@Model.Id" name="quantity" min="1" class="w-commerce-commerceaddtocartquantityinput input cart-quantity" value="1" />
-                                <input type="submit" class="w-commerce-commerceaddtocartbutton btn outline" value="@(localizer["AddToCart"])" />
+                                <button type="submit" class="w-commerce-commerceaddtocartbutton btn outline">@(localizer["AddToCart"])</button>
                             </div>
                         </form>
                     }
@@ -68,3 +70,78 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function() {
+        // Ждём загрузки jQuery
+        function initCartForm() {
+            if (typeof jQuery === 'undefined') {
+                setTimeout(initCartForm, 100);
+                return;
+            }
+            
+            jQuery(document).ready(function($) {
+                var formId = '#addToCartForm-@Model.Id';
+                $(formId).off('submit').on('submit', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                });
+                
+                $(formId + ' button[type="submit"]').off('click').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    var form = $(formId);
+                    var productId = @Model.Id;
+                    var quantity = parseInt($('#quantity-@Model.Id').val()) || 1;
+                    var token = form.find('input[name="__RequestVerificationToken"]').val();
+                    
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: 'POST',
+                        dataType: 'json',
+                        headers: {
+                            'RequestVerificationToken': token
+                        },
+                        data: { 
+                            productId: productId, 
+                            quantity: quantity,
+                            __RequestVerificationToken: token
+                        },
+                        success: function(response) {
+                            if (response && response.success) {
+                                if (typeof showToast === 'function') {
+                                    showToast('Товар добавлен в корзину!', 'success');
+                                } else {
+                                    alert('Товар добавлен в корзину!');
+                                }
+                                updateCartCount();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            if (typeof showToast === 'function') {
+                                showToast('Ошибка при добавлении товара', 'error');
+                            } else {
+                                alert('Ошибка при добавлении товара');
+                            }
+                        }
+                    });
+                    
+                    return false;
+                });
+                
+                function updateCartCount() {
+                    $.get('@Url.Action("GetCartCount", "Cart")', function(data) {
+                        if (data && data.count !== undefined) {
+                            $('#cart-count').text(data.count || 0);
+                            $('.cart-quantity-cart').text(data.count || 0);
+                        }
+                    });
+                }
+            });
+        }
+        
+        initCartForm();
+    })();
+</script>

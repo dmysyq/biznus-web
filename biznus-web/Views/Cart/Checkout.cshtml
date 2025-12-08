@@ -1,0 +1,249 @@
+@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+
+<!-- Заголовок страницы -->
+<div class="page-title-section">
+    <div class="container">
+        <h1 class="page-title">Оформление заказа</h1>
+    </div>
+</div>
+
+<!-- Секция оформления заказа -->
+<div class="content-section">
+    <div class="container">
+        <div class="checkout-wrapper">
+            <div class="checkout-form-section">
+                <h2>Данные для доставки</h2>
+                <form asp-controller="Cart" asp-action="ProcessOrder" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="FirstName"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" type="email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Phone"></label>
+                        <input asp-for="Phone" type="tel" class="form-control" placeholder="+7 (999) 123-45-67" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" placeholder="Улица, дом, квартира" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="City"></label>
+                            <input asp-for="City" class="form-control" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PostalCode"></label>
+                            <input asp-for="PostalCode" class="form-control" />
+                            <span asp-validation-for="PostalCode" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Comment"></label>
+                        <textarea asp-for="Comment" class="form-control" rows="4" placeholder="Дополнительные пожелания к заказу"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+
+                    @* CartItems и Total загружаются из сессии в контроллере *@
+
+                    <div class="form-actions">
+                        <a href="@Url.Action("Index", "Cart")" class="btn outline">Назад к корзине</a>
+                        <button type="submit" class="btn">Оформить заказ</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="checkout-summary">
+                <h3>Ваш заказ</h3>
+                <div class="order-items">
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <div class="order-item">
+                            <div class="order-item-info">
+                                @if (!string.IsNullOrEmpty(item.ProductImageUrl))
+                                {
+                                    <img src="@Url.Content(item.ProductImageUrl)" alt="@item.ProductName" class="order-item-image" />
+                                }
+                                <div>
+                                    <div class="order-item-name">@item.ProductName</div>
+                                    <div class="order-item-quantity">Количество: @item.Quantity</div>
+                                </div>
+                            </div>
+                            <div class="order-item-price">$@item.Subtotal.ToString("F2")</div>
+                        </div>
+                    }
+                </div>
+                <div class="order-total">
+                    <strong>Итого: $@Model.Total.ToString("F2")</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .checkout-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .checkout-form-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .checkout-form-section h2 {
+        color: #333;
+        margin-bottom: 2rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #4ecdc4;
+        box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);
+    }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: block;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .checkout-summary {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        height: fit-content;
+        position: sticky;
+        top: 20px;
+    }
+
+    .checkout-summary h3 {
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+    .order-items {
+        margin-bottom: 1.5rem;
+    }
+
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #e1e5e9;
+    }
+
+    .order-item:last-child {
+        border-bottom: none;
+    }
+
+    .order-item-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .order-item-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .order-item-name {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .order-item-quantity {
+        font-size: 0.875rem;
+        color: #666;
+    }
+
+    .order-item-price {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .order-total {
+        padding-top: 1.5rem;
+        border-top: 2px solid #e1e5e9;
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    @@media (max-width: 968px) {
+        .checkout-wrapper {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+

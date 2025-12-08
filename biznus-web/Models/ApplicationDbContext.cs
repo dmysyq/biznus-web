@@ -30,7 +30,14 @@ namespace biznus_web.Models
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Product)
+                .WithMany()
+                .HasForeignKey(c => c.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Стартовые данные для быстрого теста
+            // Пользователи регистрируются через форму регистрации
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Tents", Slug = "tents", Description = "Reliable tents for camping and outdoor adventures", IsActive = true },
                 new Category { Id = 2, Name = "Packs", Slug = "packs", Description = "Durable backpacks and travel packs", IsActive = true },

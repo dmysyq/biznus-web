@@ -17,6 +17,7 @@
 	<meta content="summary_large_image" name="twitter:card" />
 	<meta content="Webflow" name="generator" />
 	<link href="~/css/webflow-style.css" rel="stylesheet" type="text/css" />
+	<link href="~/css/toast.css" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com" rel="preconnect" />
 	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
 	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -81,7 +82,6 @@
 						<!-- Переключатель языков -->
 						@Html.Partial("_lang")
 
-
 							<!-- Секция авторизации -->
 							@if (User.Identity?.IsAuthenticated == true)
 							{
@@ -103,12 +103,11 @@
 							}
 
 							<!-- Корзина покупок -->
-							<div data-node-type="commerce-cart-wrapper" data-open-product="" data-wf-cart-type="rightSidebar" class="w-commerce-commercecartwrapper cart-menu">
-								<a href="#" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart">
+							<div class="w-commerce-commercecartwrapper cart-menu">
+								<a href="@Url.Action("Index", "Cart")" class="w-commerce-commercecartopenlink cart w-inline-block" role="button" aria-label="Open cart" style="position: relative;">
 									<img src="~/images/cart.svg" alt="" class="cart-icon" />
-									<div class="w-commerce-commercecartopenlinkcount cart-quantity-cart">0</div>
+									<div id="cart-count" class="w-commerce-commercecartopenlinkcount cart-quantity-cart">0</div>
 								</a>
-								<!-- Корзина будет реализована позже -->
 							</div>
 						</div>
 					</div>
@@ -155,8 +154,19 @@
 	<!-- Скрипты -->
 	<script src="~/js/jquery.js" type="text/javascript"></script>
 	<script src="~/js/webflow-script.js" type="text/javascript"></script>
+	<script src="~/js/toast.js" type="text/javascript"></script>
 	<script>
-				$('#CultureList').on('change', function () {
+		$(document).ready(function() {
+			// Обновляем счетчик корзины при загрузке страницы
+			function updateCartCount() {
+				$.get('@Url.Action("GetCartCount", "Cart")', function(data) {
+					$('#cart-count').text(data.count || 0);
+					$('.cart-quantity-cart').text(data.count || 0);
+				});
+			}
+			updateCartCount();
+
+			$('#CultureList').on('change', function () {
 			 $.ajax({
 				 url: '/Home/Cookie',
 				 data: { culture: $(this).val() },
@@ -168,6 +178,7 @@
 				 error: function (xhr, status, error) {
 				 }
 			 });
+		});
 		});
 	</script>
 </body>

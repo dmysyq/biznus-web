@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "Заказ оформлен";
+    var orderId = ViewData["OrderId"] as string ?? "N/A";
+}
+
+<!-- Заголовок страницы -->
+<div class="page-title-section">
+    <div class="container">
+        <h1 class="page-title">Заказ успешно оформлен!</h1>
+    </div>
+</div>
+
+<!-- Секция успешного заказа -->
+<div class="content-section">
+    <div class="container">
+        <div class="success-wrapper">
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="#4ecdc4" stroke-width="2" fill="none"/>
+                    <path d="M8 12l2 2 4-4" stroke="#4ecdc4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2>Спасибо за ваш заказ!</h2>
+            <p class="order-id">Номер заказа: <strong>@orderId</strong></p>
+            <p>Мы получили ваш заказ и обработаем его в ближайшее время. На указанный email будет отправлено подтверждение заказа.</p>
+            <div class="success-actions">
+                <a href="@Url.Action("Index", "Home")" class="btn">Вернуться на главную</a>
+                <a href="@Url.Action("Index", "Shop")" class="btn outline">Продолжить покупки</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .success-wrapper {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        max-width: 600px;
+        margin: 2rem auto;
+    }
+
+    .success-icon {
+        margin-bottom: 2rem;
+    }
+
+    .success-wrapper h2 {
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .order-id {
+        font-size: 1.125rem;
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .order-id strong {
+        color: #4ecdc4;
+        font-size: 1.25rem;
+    }
+
+    .success-wrapper p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .success-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+</style>
+

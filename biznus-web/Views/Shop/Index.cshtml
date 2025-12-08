@@ -92,6 +92,15 @@
                                         </a>
                                         <div class="shop-button-wrapper">
                                             <a asp-controller="Shop" asp-action="Product" asp-route-id="@product.Id" class="btn w-button">@(localizer["Details"])</a>
+                                            @if (product.IsAvailable)
+                                            {
+                                                <form asp-controller="Cart" asp-action="Add" method="post" style="display: inline; margin-left: 0.5rem;" class="add-to-cart-form-@product.Id">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="productId" value="@product.Id" />
+                                                    <input type="hidden" name="quantity" value="1" />
+                                                    <button type="submit" class="btn outline w-button">@(localizer["AddToCart"])</button>
+                                                </form>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -111,3 +120,73 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function() {
+        function initCartForms() {
+            if (typeof jQuery === 'undefined') {
+                setTimeout(initCartForms, 100);
+                return;
+            }
+            
+            jQuery(document).ready(function($) {
+                $('[class^="add-to-cart-form-"]').each(function() {
+                    var form = $(this);
+                    form.off('submit').on('submit', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    });
+                    
+                    form.find('button[type="submit"]').off('click').on('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        var formData = form.serialize();
+                        var token = form.find('input[name="__RequestVerificationToken"]').val();
+                        
+                        $.ajax({
+                            url: form.attr('action'),
+                            type: 'POST',
+                            dataType: 'json',
+                            headers: {
+                                'RequestVerificationToken': token
+                            },
+                            data: formData,
+                            success: function(response) {
+                                if (response && response.success) {
+                                    if (typeof showToast === 'function') {
+                                        showToast('Товар добавлен в корзину!', 'success');
+                                    } else {
+                                        alert('Товар добавлен в корзину!');
+                                    }
+                                    updateCartCount();
+                                }
+                            },
+                            error: function() {
+                                if (typeof showToast === 'function') {
+                                    showToast('Ошибка при добавлении товара', 'error');
+                                } else {
+                                    alert('Ошибка при добавлении товара');
+                                }
+                            }
+                        });
+                        
+                        return false;
+                    });
+                });
+                
+                function updateCartCount() {
+                    $.get('@Url.Action("GetCartCount", "Cart")', function(data) {
+                        if (data && data.count !== undefined) {
+                            $('#cart-count').text(data.count || 0);
+                            $('.cart-quantity-cart').text(data.count || 0);
+                        }
+                    });
+                }
+            });
+        }
+        
+        initCartForms();
+    })();
+</script>

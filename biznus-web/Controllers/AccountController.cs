@@ -7,20 +7,21 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace biznus_web.Controllers
 {
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
-        private static readonly Dictionary<string, AppUser> _users = new Dictionary<string, AppUser>();
+        private readonly ApplicationDbContext _db;
 
-
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(
+            ILogger<AccountController> logger,
+            ApplicationDbContext db)
         {
             _logger = logger;
-
-            SeedTestUsers();
+            _db = db;
         }
 
         [HttpGet]
@@ -45,13 +46,17 @@ namespace biznus_web.Controllers
                 return View(model);
             }
 
-            var user = ValidateUser(model.Email, model.Password);
+            var user = await ValidateUserAsync(model.Email, model.Password);
             if (user == null)
             {
                 _logger.LogWarning("Login failed - invalid credentials for email: {Email}", model.Email);
                 ModelState.AddModelError(string.Empty, "Invalid email or password.");
                 return View(model);
             }
+
+            // Обновляем время последнего входа
+            user.LastLoginAt = DateTime.UtcNow;
+            await _db.SaveChangesAsync();
 
             // Создаем claims для аутентификации
             var claims = new List<Claim>
@@ -114,14 +119,14 @@ namespace biznus_web.Controllers
                 return View(model);
             }
 
-            if (IsEmailExists(model.Email))
+            if (await IsEmailExistsAsync(model.Email))
             {
                 _logger.LogWarning("Registration failed - email already exists: {Email}", model.Email);
                 ModelState.AddModelError(nameof(model.Email), "Email already exists.");
                 return View(model);
             }
 
-            var user = CreateUser(model);
+            var user = await CreateUserAsync(model);
             if (user == null)
             {
                 _logger.LogError("Registration failed - unable to create user for email: {Email}", model.Email);
@@ -169,7 +174,7 @@ namespace biznus_web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
             if (!User.Identity?.IsAuthenticated ?? true)
             {
@@ -177,38 +182,35 @@ namespace biznus_web.Controllers
                 return RedirectToAction("Login");
             }
 
-            var userEmail = User.FindFirst(ClaimTypes.Email)?.Value ?? "Unknown";
-            _logger.LogInformation("User {Email} accessed profile page", userEmail);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                _logger.LogWarning("User ID not found in claims");
+                return RedirectToAction("Login");
+            }
+
+            var user = await _db.Users.FindAsync(userId);
+            if (user == null)
+            {
+                _logger.LogWarning("User not found in database. UserId: {UserId}", userId);
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("Login");
+            }
+
+            _logger.LogInformation("User {Email} accessed profile page", user.Email);
             
             ViewData["Title"] = "Profile";
-            return View();
+            ViewData["User"] = user;
+            return View(user);
         }
 
         // Приватные методы для работы с пользователями
-        private void SeedTestUsers()
+        private async Task<AppUser?> ValidateUserAsync(string email, string password)
         {
-            if (!_users.Any())
-            {
-                var testUser1 = new AppUser
-                {
-                    Id = "test-user-1",
-                    FirstName = "Sakishov",
-                    LastName = "Aldiyar",
-                    Email = "test@example.com",
-                    UserName = "test@example.com",
-                    PasswordHash = HashPassword("password123"),
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
-                };
-                _users[testUser1.Id] = testUser1;
+            var emailLower = email.ToLower();
+            var user = await _db.Users
+                .FirstOrDefaultAsync(u => u.Email.ToLower() == emailLower && u.IsActive);
 
-                _logger.LogInformation("Test users created: test@example.com and jane@example.com");
-            }
-        }
-
-        private AppUser? ValidateUser(string email, string password)
-        {
-            var user = _users.Values.FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
             if (user != null && VerifyPassword(password, user.PasswordHash))
             {
                 return user;
@@ -216,12 +218,14 @@ namespace biznus_web.Controllers
             return null;
         }
 
-        private bool IsEmailExists(string email)
+        private async Task<bool> IsEmailExistsAsync(string email)
         {
-            return _users.Values.Any(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            var emailLower = email.ToLower();
+            return await _db.Users
+                .AnyAsync(u => u.Email.ToLower() == emailLower);
         }
 
-        private AppUser? CreateUser(RegisterViewModel model)
+        private async Task<AppUser> CreateUserAsync(RegisterViewModel model)
         {
             var user = new AppUser
             {
@@ -235,7 +239,9 @@ namespace biznus_web.Controllers
                 IsActive = true
             };
 
-            _users[user.Id] = user;
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
+
             return user;
         }
 

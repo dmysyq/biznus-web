@@ -1,3 +1,4 @@
+@model biznus_web.Models.AppUser
 @{
     ViewData["Title"] = "Profile";
 }
@@ -13,18 +14,20 @@
                     <div class="profile-avatar">
                         <div class="avatar-circle">
                             @{
-                                var firstName = User.FindFirst("FirstName")?.Value ?? "U";
-                                var lastName = User.FindFirst("LastName")?.Value ?? "U";
-                                var initials = $"{firstName[0]}{lastName[0]}";
+                                var initials = $"{Model.FirstName[0]}{Model.LastName[0]}";
                             }
                             @initials
                         </div>
                     </div>
                     
                     <div class="profile-details">
-                        <h2>@User.Identity?.Name</h2>
-                        <p class="profile-email">@User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value</p>
-                        <p class="profile-member-since">Member since: @DateTime.Now.ToString("MMMM yyyy")</p>
+                        <h2>@Model.FullName</h2>
+                        <p class="profile-email">@Model.Email</p>
+                        <p class="profile-member-since">Member since: @Model.CreatedAt.ToString("MMMM yyyy")</p>
+                        @if (Model.LastLoginAt.HasValue)
+                        {
+                            <p class="profile-last-login">Last login: @Model.LastLoginAt.Value.ToString("MMMM dd, yyyy HH:mm")</p>
+                        }
                     </div>
                 </div>
 
@@ -114,6 +117,12 @@
     .profile-member-since {
         color: #999;
         font-size: 0.9rem;
+    }
+
+    .profile-last-login {
+        color: #999;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
     }
 
     .profile-actions {
