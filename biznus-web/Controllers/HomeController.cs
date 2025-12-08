@@ -63,6 +63,28 @@ namespace biznus_web.Controllers
             return Json(culture);
         }
 
+        [HttpGet]
+        [Route("/test-logging")]
+        public IActionResult TestLogging()
+        {
+            _logger.LogTrace("Test Trace log - This is a trace message");
+            _logger.LogDebug("Test Debug log - This is a debug message");
+            _logger.LogInformation("Test Information log - This is an info message");
+            _logger.LogWarning("Test Warning log - This is a warning message");
+            _logger.LogError("Test Error log - This is an error message (test)");
+            _logger.LogCritical("Test Critical log - This is a critical message (test)");
+
+            return Json(new 
+            { 
+                message = "Test logs sent! Check Seq at http://localhost:5341",
+                timestamp = DateTime.UtcNow,
+                logs = new[]
+                {
+                    "Trace", "Debug", "Information", "Warning", "Error", "Critical"
+                }
+            });
+        }
+
 
 
         private async Task<List<Product>> GetFeaturedProductsAsync()

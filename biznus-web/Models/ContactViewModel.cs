@@ -11,6 +11,8 @@ namespace biznus_web.Models
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Message is required")]
+        [StringLength(5000, ErrorMessage = "Message cannot exceed 5000 characters")]
         public string Message { get; set; } = string.Empty;
 
         public bool IsSuccess { get; set; } = false;

@@ -14,6 +14,7 @@ namespace biznus_web.Models
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Translation> Translations { get; set; } = null!;
         public DbSet<CartItem> CartItems { get; set; } = null!;
+        public DbSet<ContactMessage> ContactMessages { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

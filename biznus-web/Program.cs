@@ -16,15 +16,21 @@ using Serilog.Events;
 var builder = WebApplication.CreateBuilder(args);
 
 // Настройка Serilog для Seq (используем конфигурацию из appsettings.json)
+var seqUrl = builder.Configuration["Serilog:WriteTo:1:Args:serverUrl"] ?? 
+             Environment.GetEnvironmentVariable("SEQ_URL") ?? 
+             "http://localhost:5341";
+
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
     .ReadFrom.Services(services)
     .Enrich.FromLogContext()
-    .WriteTo.Console()
+    .Enrich.WithProperty("Application", "BiznusWeb")
+    .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
+    .WriteTo.Console(
+        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
     .WriteTo.Seq(
-        serverUrl: context.Configuration["Serilog:WriteTo:1:Args:serverUrl"] ?? 
-                   Environment.GetEnvironmentVariable("SEQ_URL") ?? 
-                   "http://localhost:5341")
+        serverUrl: seqUrl,
+        restrictedToMinimumLevel: LogEventLevel.Information)
 );
 
 
@@ -155,7 +161,11 @@ app.MapControllerRoute(
 
 try
 {
-    Log.Information("Starting BiznusWeb application");
+    Log.Information("=== BiznusWeb Application Starting ===");
+    Log.Information("Seq URL: {SeqUrl}", seqUrl);
+    Log.Information("Environment: {Environment}", app.Environment.EnvironmentName);
+    Log.Information("Application started successfully");
+    
     app.Run();
 }
 catch (Exception ex)
@@ -165,6 +175,7 @@ catch (Exception ex)
 }
 finally
 {
+    Log.Information("=== BiznusWeb Application Shutting Down ===");
     Log.CloseAndFlush();
 }
 
