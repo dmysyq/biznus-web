@@ -2,7 +2,6 @@ using biznus_web.Models;
 using biznus_web.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Diagnostics;
@@ -12,19 +11,16 @@ namespace biznus_web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IStringLocalizer<HomeController> _stringLocalizer;
         private readonly ApplicationDbContext _db;
         private readonly TranslationService _translationService;
 
 
         public HomeController(
             ILogger<HomeController> logger,
-            IStringLocalizer<HomeController> stringLocalizer,
             ApplicationDbContext db,
             TranslationService translationService)
         {
             _logger = logger;
-            _stringLocalizer = stringLocalizer;
             _db = db;
             _translationService = translationService;
         }

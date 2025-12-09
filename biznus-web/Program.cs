@@ -38,12 +38,7 @@ builder.Services.AddControllersWithViews(options =>
     {
         options.Filters.Add<ApiExceptionFilter>();
         options.Filters.Add<ApiLoggingFilter>();
-    })
-    .AddViewLocalization()
-    .AddDataAnnotationsLocalization();
-
-
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+    });
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -54,21 +49,6 @@ builder.Services.AddScoped<biznus_web.Services.CartService>();
 builder.Services.AddHttpClient<biznus_web.Services.ApiClientService>();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-    var supportedCulture = new[]
-    {
-        new CultureInfo("en-US"),
-        new CultureInfo("ru-RU"),
-        new CultureInfo("kk-KZ"),
-        new CultureInfo("fr-FR")
-    };
-
-    options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
-    options.SupportedCultures = supportedCulture;
-    options.SupportedUICultures = supportedCulture;
-   
-});
 
 // Настройка JWT
 var jwtKey = builder.Configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key not configured");
@@ -133,12 +113,16 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
+// Настройка локализации для БД (только для определения культуры, не для resx)
 var supportedCulture = new[] { "en-US", "kk-KZ", "ru-RU", "fr-FR" };
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture("ru-RU")
     .AddSupportedCultures(supportedCulture)
     .AddSupportedUICultures(supportedCulture);
-
+localizationOptions.RequestCultureProviders.Clear();
+localizationOptions.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+localizationOptions.RequestCultureProviders.Add(new QueryStringRequestCultureProvider());
+localizationOptions.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
 app.UseRequestLocalization(localizationOptions);
 
 

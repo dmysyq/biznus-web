@@ -1,6 +1,4 @@
 @model Product
-@using Microsoft.Extensions.Localization
-@inject IStringLocalizer<biznus_web.Controllers.ShopController> localizer
 @{
     ViewData["Title"] = Model.Name;
 }
@@ -20,7 +18,7 @@
                 <div style="background-image:url('@Url.Content(Model.ImageUrl)')" class="shopping-page-image">
                     @if (Model.Price < 100)
                     {
-                        <div class="pill-2 badge primary sale">@(localizer["Sale"])</div>
+                        <div class="pill-2 badge primary sale">Sale</div>
                     }
                 </div>
             </div>
@@ -35,26 +33,26 @@
                         <form asp-controller="Cart" asp-action="Add" method="post" class="w-commerce-commerceaddtocartform" id="addToCartForm-@Model.Id">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="productId" value="@Model.Id" />
-                            <label for="quantity-@Model.Id">@(localizer["Quantity"])</label>
+                            <label for="quantity-@Model.Id">Quantity</label>
                             <div class="add-to-cart-page-wrapper">
                                 <input type="number" pattern="^[0-9]+$" inputMode="numeric" id="quantity-@Model.Id" name="quantity" min="1" class="w-commerce-commerceaddtocartquantityinput input cart-quantity" value="1" />
-                                <button type="submit" class="w-commerce-commerceaddtocartbutton btn outline">@(localizer["AddToCart"])</button>
+                                <button type="submit" class="w-commerce-commerceaddtocartbutton btn outline">Add to Cart</button>
                             </div>
                         </form>
                     }
                     else
                     {
                         <div class="w-commerce-commerceaddtocartoutofstock" tabindex="0">
-                            <div>@(localizer["OutOfStock"])</div>
+                            <div>Out of Stock</div>
                         </div>
                     }
                 </div>
                 <div class="w-richtext">
-                    <h2>@(localizer["ProductDescription"])</h2>
+                    <h2>Product Description</h2>
                     <p>@Model.Description</p>
-                    <h4>@(localizer["ProductDetails"])</h4>
+                    <h4>Product Details</h4>
                     <p>This is a high-quality @(Model.Category?.ToLower() ?? "product") that will meet all your outdoor needs. Perfect for camping, hiking, and other outdoor adventures.</p>
-                    <h4>@(localizer["Features"])</h4>
+                    <h4>Features</h4>
                     <p>• Durable construction<br/>
                     • Weather resistant<br/>
                     • Easy to set up<br/>

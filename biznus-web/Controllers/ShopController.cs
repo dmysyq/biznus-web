@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using biznus_web.Models;
 using biznus_web.Services;
 using Microsoft.EntityFrameworkCore;
@@ -10,18 +9,15 @@ namespace biznus_web.Controllers
     public class ShopController : Controller
     {
         private readonly ILogger<ShopController> _logger;
-        private readonly IStringLocalizer<ShopController> _stringLocalizer;
         private readonly ApplicationDbContext _db;
         private readonly TranslationService _translationService;
 
         public ShopController(
             ILogger<ShopController> logger,
-            IStringLocalizer<ShopController> stringLocalizer,
             ApplicationDbContext db,
             TranslationService translationService)
         {
             _logger = logger;
-            _stringLocalizer = stringLocalizer;
             _db = db;
             _translationService = translationService;
         }
